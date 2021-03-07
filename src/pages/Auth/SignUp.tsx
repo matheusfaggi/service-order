@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
-import { Button, Input } from 'react-native-elements'
+import { Button } from 'react-native-paper'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { useKeyboard } from '../../hooks/Keyboard'
 import { AuthStack } from '../../routes/index'
-import { AuthContainer, AuthForm, Title } from '../../styles/Auth'
+import { AuthContainer, AuthForm, Title, Input } from '../../styles/Auth'
 
 type SignUpScreenNavigationProp = StackNavigationProp<AuthStack, 'SignUp'>
 
@@ -26,24 +25,24 @@ const SignUp: React.FC<Props> = ({ navigation }: Props) => {
           <Title>Cadastrar</Title>
           <Input
             value={name}
-            onChangeText={(value) => setName(value)}
+            onChangeText={(value: string) => setName(value)}
             placeholder="Digite o seu nome"
           />
           <Input
             value={email}
-            onChangeText={(value) => setEmail(value)}
+            onChangeText={(value: string) => setEmail(value)}
             placeholder="Digite o seu email"
           />
           <Input
             value={phone}
-            onChangeText={(value) => setPhone(value)}
+            onChangeText={(value: string) => setPhone(value)}
             placeholder="Digite o seu celular"
             keyboardType="phone-pad"
             maxLength={11}
           />
           <Input
             value={password}
-            onChangeText={(value) => setPassword(value)}
+            onChangeText={(value: string) => setPassword(value)}
             secureTextEntry={true}
             placeholder="Digite sua senha"
           />
@@ -53,14 +52,14 @@ const SignUp: React.FC<Props> = ({ navigation }: Props) => {
               justifyContent: 'space-between',
               height: 90,
             }}>
-            <Button title="Cadastrar" />
+            <Button mode="contained">Cadastrar</Button>
             <Button
-              title="Já possuo uma conta"
               onPress={() => {
                 navigation.navigate('SignIn')
               }}
-              type="clear"
-            />
+              mode="text">
+              Já possuo conta
+            </Button>
           </View>
         </AuthForm>
       </TouchableWithoutFeedback>

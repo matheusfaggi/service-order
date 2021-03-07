@@ -6,7 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigatorScreenParams, RouteProp } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { SignIn, SignUp } from '../pages/Auth'
-import { CreateOrderService, ListOrderService, Profile } from '../pages/App'
+import {
+  CreateOrderService,
+  ListOrderService,
+  Profile,
+  ShowOrderService,
+} from '../pages/App'
 import { AuthContext } from '../contexts/index'
 
 export type RootStack = {
@@ -19,13 +24,18 @@ export type AuthStack = {
 }
 export type AppTab = {
   CreateOrderService: undefined
-  ListOrderService: undefined
+  OrderService: undefined
   Profile: undefined
+}
+export type OrderStack = {
+  ListOrderService: undefined
+  ShowOrderService: undefined
 }
 export type Router = RouteProp<RootStack, 'App'>
 
 const RootStackNavigator = createStackNavigator<RootStack>()
 const AuthStackNavigator = createStackNavigator<AuthStack>()
+const OrderStackNavigation = createStackNavigator<OrderStack>()
 const AppTabNavigator = createBottomTabNavigator<AppTab>()
 
 const AuthRoute: React.FC = () => {
@@ -37,12 +47,29 @@ const AuthRoute: React.FC = () => {
   )
 }
 
+const OrderServiceRoute: React.FC = () => {
+  return (
+    <OrderStackNavigation.Navigator
+      initialRouteName="ListOrderService"
+      headerMode="none">
+      <OrderStackNavigation.Screen
+        name="ShowOrderService"
+        component={ShowOrderService}
+      />
+      <OrderStackNavigation.Screen
+        name="ListOrderService"
+        component={ListOrderService}
+      />
+    </OrderStackNavigation.Navigator>
+  )
+}
+
 const AppRoute: React.FC = () => {
   return (
     <AppTabNavigator.Navigator>
       <AppTabNavigator.Screen
-        name="ListOrderService"
-        component={ListOrderService}
+        name="OrderService"
+        component={OrderServiceRoute}
         options={{
           title: 'Ordens de serviço',
           tabBarIcon: ({ size }) => (

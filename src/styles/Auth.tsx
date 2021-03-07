@@ -4,7 +4,10 @@ import {
   KeyboardAvoidingView,
   KeyboardAvoidingViewProps,
   Platform,
+  TextInputProps,
 } from 'react-native'
+import { TextInput } from 'react-native-paper'
+
 import styled from 'styled-components'
 
 export const AuthContainer = styled(KeyboardAvoidingView).attrs(
@@ -26,4 +29,7 @@ export const AuthForm = styled(View)`
 export const Title = styled(Text)`
   padding-bottom: 32px;
   font-size: 42px;
+`
+export const Input = styled(TextInput)`
+  margin-bottom: 8;
 `

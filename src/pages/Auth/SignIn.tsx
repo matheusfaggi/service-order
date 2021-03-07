@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { View, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import { Button, Input } from 'react-native-elements'
+import { Button, TextInput } from 'react-native-paper'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import { AuthStack, RootStack } from '../../routes/index'
-import { AuthContainer, AuthForm, Title } from '../../styles/Auth'
+import { AuthContainer, AuthForm, Title, Input } from '../../styles/Auth'
 import { AuthContext } from '../../contexts/index'
 
 type SignInScreenNavigationProp = StackNavigationProp<AuthStack, 'SignIn'>
@@ -24,13 +24,15 @@ const SignIn: React.FC<Props> = ({ navigation }: Props) => {
           <Title>Entrar</Title>
           <Input
             value={email}
-            onChangeText={(value) => setEmail(value)}
+            onChangeText={(value: string) => setEmail(value)}
             keyboardType="email-address"
             placeholder="Digite o seu email"
+            label="Email"
           />
           <Input
+            label="Senha"
             value={password}
-            onChangeText={(value) => setPassword(value)}
+            onChangeText={(value: string) => setPassword(value)}
             placeholder="Digite sua senha"
             secureTextEntry={true}
           />
@@ -41,18 +43,19 @@ const SignIn: React.FC<Props> = ({ navigation }: Props) => {
               height: 90,
             }}>
             <Button
-              title="Entrar"
+              mode="contained"
               onPress={() => {
                 SignIn()
-              }}
-            />
+              }}>
+              Entrar
+            </Button>
             <Button
-              title="Cadastrar"
               onPress={() => {
                 navigation.navigate('SignUp')
               }}
-              type="clear"
-            />
+              mode="text">
+              Cadastre-se
+            </Button>
           </View>
         </AuthForm>
       </TouchableWithoutFeedback>
