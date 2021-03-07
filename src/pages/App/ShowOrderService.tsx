@@ -1,6 +1,13 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
-import { Paragraph, Subheading, Card, Title, Chip } from 'react-native-paper'
+import {
+  Paragraph,
+  Subheading,
+  Card,
+  Title,
+  Chip,
+  Button,
+} from 'react-native-paper'
 
 const ShowOrderService: React.FC = () => {
   return (
@@ -28,6 +35,10 @@ const ShowOrderService: React.FC = () => {
             ea Lorem tempor anim sit elit velit eu sint fugiat Lorem.
           </Paragraph>
         </Card.Content>
+        <Card.Actions style={{ justifyContent: 'space-around' }}>
+          <Button>Cancelar ordem</Button>
+          <Button mode="contained">Finalizar ordem</Button>
+        </Card.Actions>
       </Card>
       <Title style={{ marginBottom: 16, marginTop: 16 }}>Comentários</Title>
       <Card style={{ marginVertical: 8 }}>

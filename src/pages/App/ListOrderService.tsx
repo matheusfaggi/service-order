@@ -19,7 +19,7 @@ const data: CardOrderTypes[] = [
     client: 'Matheus Faggi',
     price: '160,00',
     createdAt: '10/01/2020',
-    finishedAt: '10/02/2020',
+    finishedAt: '-',
     status: 'aberto',
   },
   {
@@ -51,7 +51,7 @@ const data: CardOrderTypes[] = [
     client: 'Gilberto Gil',
     price: '160,00',
     createdAt: '10/01/2020',
-    finishedAt: '10/02/2020',
+    finishedAt: '-',
     status: 'aberto',
   },
   {
@@ -59,7 +59,7 @@ const data: CardOrderTypes[] = [
     client: 'Danilo Cutrim',
     price: '160,00',
     createdAt: '10/01/2020',
-    finishedAt: '10/02/2020',
+    finishedAt: '-',
     status: 'aberto',
   },
 ]
