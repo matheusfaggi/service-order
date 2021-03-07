@@ -1,19 +1,31 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+import React, { useContext, useState } from 'react'
+import { Icon } from 'react-native-elements'
 import { createStackNavigator } from '@react-navigation/stack'
-import { NavigatorScreenParams } from '@react-navigation/native'
+import { NavigatorScreenParams, RouteProp } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { SignIn, SignUp } from '../pages/Auth'
+import { CreateOrderService, ListOrderService } from '../pages/App'
+import { AuthContext, AuthContextProvider } from '../contexts/index'
 
-export type StackRoot = {
+export type RootStack = {
   Auth: NavigatorScreenParams<AuthStack>
-  App: undefined
+  App: NavigatorScreenParams<AppTab>
 }
 export type AuthStack = {
   SignIn: undefined
   SignUp: undefined
 }
+export type AppTab = {
+  CreateOrderService: undefined
+  ListOrderService: undefined
+}
+export type Router = RouteProp<RootStack, 'App'>
 
-const RootStackNavigator = createStackNavigator<StackRoot>()
+const RootStackNavigator = createStackNavigator<RootStack>()
 const AuthStackNavigator = createStackNavigator<AuthStack>()
+const AppTabNavigator = createBottomTabNavigator<AppTab>()
 
 const AuthRoute: React.FC = () => {
   return (
@@ -23,12 +35,44 @@ const AuthRoute: React.FC = () => {
     </AuthStackNavigator.Navigator>
   )
 }
+const AppRoute: React.FC = () => {
+  return (
+    <AppTabNavigator.Navigator>
+      <AppTabNavigator.Screen
+        name="ListOrderService"
+        component={ListOrderService}
+        options={{
+          title: 'Ordens de serviço',
+          tabBarIcon: ({ size }) => (
+            <Icon name="list" size={size} type="font-awesome-5" />
+          ),
+        }}
+      />
+      <AppTabNavigator.Screen
+        name="CreateOrderService"
+        component={CreateOrderService}
+        options={{
+          title: 'Nova ordem de serviço',
+          tabBarIcon: ({ size }) => (
+            <Icon name="plus" size={size} type="font-awesome-5" />
+          ),
+        }}
+      />
+    </AppTabNavigator.Navigator>
+  )
+}
+
 const RootRoute: React.FC = () => {
+  const { userToken } = useContext(AuthContext)
   return (
     <RootStackNavigator.Navigator initialRouteName="Auth" headerMode={'none'}>
-      <RootStackNavigator.Screen name="Auth" component={AuthRoute} />
+      {userToken !== '' ? (
+        <RootStackNavigator.Screen name="App" component={AppRoute} />
+      ) : (
+        <RootStackNavigator.Screen name="Auth" component={AuthRoute} />
+      )}
     </RootStackNavigator.Navigator>
   )
 }
 
-export { RootRoute, AuthRoute }
+export { RootRoute, AuthRoute, AppRoute }

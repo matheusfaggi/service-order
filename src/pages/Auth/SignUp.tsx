@@ -57,7 +57,7 @@ const SignUp: React.FC<Props> = ({ navigation }: Props) => {
             <Button
               title="Já possuo uma conta"
               onPress={() => {
-                navigation.navigate('SignUp')
+                navigation.navigate('SignIn')
               }}
               type="clear"
             />
