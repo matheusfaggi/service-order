@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View } from 'react-native'
+import { View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 import { Button, Input } from 'react-native-elements'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -15,42 +15,55 @@ type Props = {
 
 const SignUp: React.FC<Props> = ({ navigation }: Props) => {
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
-  const [keyboardHeight] = useKeyboard()
 
   return (
     <AuthContainer>
-      <AuthForm
-        style={{ bottom: keyboardHeight === 0 ? undefined : keyboardHeight }}>
-        <Title>Cadastrar</Title>
-        <Input
-          value={email}
-          onChangeText={(value) => setEmail(value)}
-          keyboardType="email-address"
-          placeholder="Digite o seu email"
-        />
-        <Input
-          value={password}
-          onChangeText={(value) => setPassword(value)}
-          keyboardType="email-address"
-          placeholder="Digite sua senha"
-        />
-        <View
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            height: 90,
-          }}>
-          <Button title="Entrar" />
-          <Button
-            title="Já possuo cadastro"
-            onPress={() => {
-              navigation.navigate('SignIn')
-            }}
-            type="clear"
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <AuthForm>
+          <Title>Cadastrar</Title>
+          <Input
+            value={name}
+            onChangeText={(value) => setName(value)}
+            placeholder="Digite o seu nome"
           />
-        </View>
-      </AuthForm>
+          <Input
+            value={email}
+            onChangeText={(value) => setEmail(value)}
+            placeholder="Digite o seu email"
+          />
+          <Input
+            value={phone}
+            onChangeText={(value) => setPhone(value)}
+            placeholder="Digite o seu celular"
+            keyboardType="phone-pad"
+            maxLength={11}
+          />
+          <Input
+            value={password}
+            onChangeText={(value) => setPassword(value)}
+            secureTextEntry={true}
+            placeholder="Digite sua senha"
+          />
+          <View
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              height: 90,
+            }}>
+            <Button title="Entrar" />
+            <Button
+              title="Já possuo uma conta"
+              onPress={() => {
+                navigation.navigate('SignUp')
+              }}
+              type="clear"
+            />
+          </View>
+        </AuthForm>
+      </TouchableWithoutFeedback>
     </AuthContainer>
   )
 }
