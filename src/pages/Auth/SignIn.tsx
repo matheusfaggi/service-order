@@ -8,14 +8,12 @@ import { AuthContainer, AuthForm, Title } from '../../styles/Auth'
 import { AuthContext } from '../../contexts/index'
 
 type SignInScreenNavigationProp = StackNavigationProp<AuthStack, 'SignIn'>
-type RootScreenNavigationProp = StackNavigationProp<RootStack, 'App'>
 
 type Props = {
   navigation: SignInScreenNavigationProp
-  successNavigation: RootScreenNavigationProp
 }
 
-const SignIn: React.FC<Props> = ({ navigation, successNavigation }: Props) => {
+const SignIn: React.FC<Props> = ({ navigation }: Props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { SignIn } = useContext(AuthContext)
@@ -33,8 +31,8 @@ const SignIn: React.FC<Props> = ({ navigation, successNavigation }: Props) => {
           <Input
             value={password}
             onChangeText={(value) => setPassword(value)}
-            keyboardType="email-address"
             placeholder="Digite sua senha"
+            secureTextEntry={true}
           />
           <View
             style={{

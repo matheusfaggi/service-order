@@ -53,7 +53,7 @@ const SignUp: React.FC<Props> = ({ navigation }: Props) => {
               justifyContent: 'space-between',
               height: 90,
             }}>
-            <Button title="Entrar" />
+            <Button title="Cadastrar" />
             <Button
               title="Já possuo uma conta"
               onPress={() => {

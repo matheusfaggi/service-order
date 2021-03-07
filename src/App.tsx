@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { RootRoute } from './routes'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { AuthContext } from './contexts/index'
+
 const App: React.FC = () => {
   const [userToken, setUserToken] = useState('')
   const SignIn = () => {

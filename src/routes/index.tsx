@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Icon } from 'react-native-elements'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigatorScreenParams, RouteProp } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { SignIn, SignUp } from '../pages/Auth'
-import { CreateOrderService, ListOrderService } from '../pages/App'
-import { AuthContext, AuthContextProvider } from '../contexts/index'
+import { CreateOrderService, ListOrderService, Profile } from '../pages/App'
+import { AuthContext } from '../contexts/index'
 
 export type RootStack = {
   Auth: NavigatorScreenParams<AuthStack>
@@ -20,6 +20,7 @@ export type AuthStack = {
 export type AppTab = {
   CreateOrderService: undefined
   ListOrderService: undefined
+  Profile: undefined
 }
 export type Router = RouteProp<RootStack, 'App'>
 
@@ -35,6 +36,7 @@ const AuthRoute: React.FC = () => {
     </AuthStackNavigator.Navigator>
   )
 }
+
 const AppRoute: React.FC = () => {
   return (
     <AppTabNavigator.Navigator>
@@ -52,9 +54,19 @@ const AppRoute: React.FC = () => {
         name="CreateOrderService"
         component={CreateOrderService}
         options={{
-          title: 'Nova ordem de serviço',
+          title: 'Nova ordem',
           tabBarIcon: ({ size }) => (
             <Icon name="plus" size={size} type="font-awesome-5" />
+          ),
+        }}
+      />
+      <AppTabNavigator.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: 'Perfil',
+          tabBarIcon: ({ size }) => (
+            <Icon name="user" size={size} type="font-awesome-5" />
           ),
         }}
       />
