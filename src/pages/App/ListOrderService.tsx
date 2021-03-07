@@ -1,7 +1,7 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, Paragraph, Subheading, Headline } from 'react-native-paper'
+import { Card, Paragraph, Subheading, Headline, Chip } from 'react-native-paper'
 import { OrderStack } from '../../routes'
 
 type CardOrderTypes = {
@@ -10,6 +10,7 @@ type CardOrderTypes = {
   price: string
   createdAt: string
   finishedAt: string
+  status: string
   onPress?(): void
 }
 const data: CardOrderTypes[] = [
@@ -19,41 +20,47 @@ const data: CardOrderTypes[] = [
     price: '160,00',
     createdAt: '10/01/2020',
     finishedAt: '10/02/2020',
+    status: 'aberto',
   },
   {
     title: 'Titulo 02',
-    client: 'Matheus Faggi',
+    client: 'Ezequiel Alcantara',
     price: '160,00',
     createdAt: '10/01/2020',
     finishedAt: '10/02/2020',
+    status: 'finalizado ',
   },
   {
     title: 'Titulo 03',
-    client: 'Matheus Faggi',
+    client: 'Gabriel Reis',
     price: '160,00',
     createdAt: '10/01/2020',
     finishedAt: '10/02/2020',
+    status: 'cancelado',
   },
   {
     title: 'Titulo 04',
-    client: 'Matheus Faggi',
+    client: 'Chico Science',
     price: '160,00',
     createdAt: '10/01/2020',
     finishedAt: '10/02/2020',
+    status: 'finalizado',
   },
   {
     title: 'Titulo 05',
-    client: 'Matheus Faggi',
+    client: 'Gilberto Gil',
     price: '160,00',
     createdAt: '10/01/2020',
     finishedAt: '10/02/2020',
+    status: 'aberto',
   },
   {
     title: 'Titulo 06',
-    client: 'Matheus Faggi',
+    client: 'Danilo Cutrim',
     price: '160,00',
     createdAt: '10/01/2020',
     finishedAt: '10/02/2020',
+    status: 'aberto',
   },
 ]
 
@@ -64,11 +71,20 @@ const CardOrder: React.FC<CardOrderTypes> = ({
   finishedAt,
   price,
   onPress,
+  status,
 }: CardOrderTypes) => {
   return (
     <Card style={{ marginVertical: 8 }} onPress={onPress}>
       <Card.Content>
-        <Headline>{title}</Headline>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Headline>{title}</Headline>
+          <Chip>{status}</Chip>
+        </View>
         <Subheading>{client}</Subheading>
         <Subheading>Preço: R$ {price}</Subheading>
         <Paragraph>
@@ -78,6 +94,7 @@ const CardOrder: React.FC<CardOrderTypes> = ({
     </Card>
   )
 }
+
 type OrderScreenNavigationProps = StackNavigationProp<
   OrderStack,
   'ListOrderService'
@@ -86,6 +103,7 @@ type OrderScreenNavigationProps = StackNavigationProp<
 type Props = {
   navigation: OrderScreenNavigationProps
 }
+
 const ListOrderService: React.FC<Props> = ({ navigation }: Props) => {
   return (
     <ScrollView style={{ paddingVertical: 32, paddingHorizontal: 16 }}>
@@ -98,6 +116,7 @@ const ListOrderService: React.FC<Props> = ({ navigation }: Props) => {
           }}
         />
       ))}
+      <View style={{ height: 50 }}></View>
     </ScrollView>
   )
 }

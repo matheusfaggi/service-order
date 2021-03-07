@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { View, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import { Button, TextInput } from 'react-native-paper'
+import { Button } from 'react-native-paper'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-import { AuthStack, RootStack } from '../../routes/index'
+import { AuthStack } from '../../routes/index'
 import { AuthContainer, AuthForm, Title, Input } from '../../styles/Auth'
 import { AuthContext } from '../../contexts/index'
 

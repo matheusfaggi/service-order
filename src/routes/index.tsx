@@ -66,7 +66,7 @@ const OrderServiceRoute: React.FC = () => {
 
 const AppRoute: React.FC = () => {
   return (
-    <AppTabNavigator.Navigator>
+    <AppTabNavigator.Navigator tabBarOptions={{ style: { height: 50 } }}>
       <AppTabNavigator.Screen
         name="OrderService"
         component={OrderServiceRoute}
